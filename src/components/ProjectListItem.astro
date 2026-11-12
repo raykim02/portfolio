@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { monthYear, url } from '../lib/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, date, status, tags } = project.data;
+---
+
+<li class="project">
+  <div class="head">
+    <a href={url(`/projects/${project.id}`)}>{title}</a>
+    <span class="muted">
+      <time datetime={date.toISOString()}>{monthYear(date)}</time>
+      {status === 'in-progress' && ' (in progress)'}
+    </span>
+  </div>
+  <p>{summary}</p>
+  {
+    tags.length > 0 && (
+      <ul class="tags" aria-label="Technologies">
+        {tags.map((t) => <li>{t}</li>)}
+      </ul>
+    )
+  }
+</li>
+
+<style>
+  .project + .project {
+    margin-top: 1.5rem;
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.6rem;
+  }
+  .head a {
+    font-weight: 600;
+  }
+  .head .muted {
+    font-size: 0.85rem;
+  }
+  p {
+    margin: 0.2rem 0 0;
+  }
+</style>

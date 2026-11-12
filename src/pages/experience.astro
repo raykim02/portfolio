@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { monthYear } from '../lib/site';
+
+const roles = (await getCollection('experience')).sort(
+  (a, b) => b.data.start.valueOf() - a.data.start.valueOf(),
+);
+---
+
+<BaseLayout title="Experience" description="Work experience, tools, and domain.">
+  <h1>Experience</h1>
+
+  {
+    roles.map(({ data }) => (
+      <div class="role">
+        <p class="company">
+          {data.logo && <Image src={data.logo} alt="" width={20} height={20} />}
+          <b>{data.company}</b>
+        </p>
+        <p>
+          {data.title}
+          <br />
+          <span class="muted">
+            {monthYear(data.start)} – {data.end ? monthYear(data.end) : 'Present'}
+          </span>
+        </p>
+        <p>{data.domain}</p>
+        {data.tools.length > 0 && <p>Tools: {data.tools.join(', ')}</p>}
+      </div>
+    ))
+  }
+</BaseLayout>
+
+<style>
+  .role + .role {
+    margin-top: 2rem;
+  }
+  .role p {
+    margin: 0 0 0.6rem;
+  }
+  .company img {
+    width: 20px;
+    height: 20px;
+    vertical-align: -4px;
+    margin-right: 0.4rem;
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { monthYear, url } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, date, status, tags, github, cover, coverAlt } = project.data;
+const { Content } = await render(project);
+
+const ogImage = cover ? (await getImage({ src: cover, width: 1200, format: 'png' })).src : undefined;
+---
+
+<BaseLayout title={title} description={summary} image={ogImage} type="article">
+  <article>
+    <p class="back"><a href={url('/projects')}>← Projects</a></p>
+    <h1>{title}</h1>
+    <p class="meta muted">
+      <time datetime={date.toISOString()}>{monthYear(date)}</time>
+      {status === 'in-progress' && ' (in progress)'}
+    </p>
+    {
+      tags.length > 0 && (
+        <ul class="tags" aria-label="Technologies">
+          {tags.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      github && (
+        <p class="gh">
+          <a href={github} target="_blank" rel="noopener noreferrer">
+            View on GitHub →
+          </a>
+        </p>
+      )
+    }
+
+    {
+      cover && (
+        <figure>
+          <Image src={cover} alt={coverAlt ?? ''} widths={[640, 1280]} sizes="(max-width: 44rem) 100vw, 40rem" />
+        </figure>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+  }
+  .meta {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  .gh {
+    margin: 0.75rem 0 0;
+  }
+  .prose :global(img) {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+</style>

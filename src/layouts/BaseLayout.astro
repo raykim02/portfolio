@@ -1,0 +1,44 @@
+---
+import Seo from '../components/Seo.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { url } from '../lib/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <Seo {...Astro.props} />
+    {
+      import.meta.env.PROD && goatcounter && (
+        <script
+          is:inline
+          data-goatcounter={`https://${goatcounter}.goatcounter.com/count`}
+          async
+          src="https://gc.zgo.at/count.js"
+        />
+      )
+    }
+  </head>
+  <body>
+    <div class="layout">
+      <Sidebar />
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+---
+import { NAV, SITE, url } from '../lib/site';
+
+const current = Astro.url.pathname.replace(/\/$/, '');
+const isActive = (href: string) => {
+  const full = url(href);
+  return current === full || current.startsWith(`${full}/`);
+};
+---
+
+<header class="sidebar">
+  <a class="name" href={url('/')}>{SITE.name}</a>
+  <nav aria-label="Main">
+    <ul>
+      {
+        NAV.map((item) => (
+          <li>
+            <a href={url(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: 3rem;
+    align-self: start;
+  }
+  .name {
+    display: block;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--fg);
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li + li {
+    margin-top: 0.35rem;
+  }
+  nav a {
+    text-decoration: none;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  nav a[aria-current='page'] {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 44rem) {
+    .sidebar {
+      position: static;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+    .name {
+      margin-bottom: 0.5rem;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.25rem;
+    }
+    li + li {
+      margin-top: 0;
+    }
+  }
+</style>

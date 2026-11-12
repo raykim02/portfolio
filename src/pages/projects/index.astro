@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectListItem from '../../components/ProjectListItem.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="Projects" description="Data engineering projects: pipelines, modeling, and tooling.">
+  <h1>Projects</h1>
+  {
+    projects.length > 0 ? (
+      <ul class="plain-list">
+        {projects.map((p) => (
+          <ProjectListItem project={p} />
+        ))}
+      </ul>
+    ) : (
+      <p class="muted">Projects coming soon.</p>
+    )
+  }
+</BaseLayout>

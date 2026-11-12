@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { monthYear } from '../lib/site';
+
+const certs = (await getCollection('certifications')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="Other" description="Certifications, coursework, and interests.">
+  <h1>Other</h1>
+
+  <h2>Certifications &amp; coursework</h2>
+  {
+    certs.length > 0 ? (
+      <ul class="plain-list certs">
+        {certs.map(({ data }) => (
+          <li>
+            {data.url ? (
+              <a href={data.url} target="_blank" rel="noopener noreferrer">
+                {data.name}
+              </a>
+            ) : (
+              <span>{data.name}</span>
+            )}
+            <div class="muted small">
+              {data.issuer} · {monthYear(data.date)}
+              {data.status === 'in-progress' && ' (in progress)'}
+            </div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="muted">Coming soon.</p>
+    )
+  }
+
+  <h2>Interests</h2>
+  <!-- TODO: replace with your own interests -->
+  <ul>
+    <li>Interest one</li>
+    <li>Interest two</li>
+    <li>Interest three</li>
+  </ul>
+
+  <p class="muted small credit">
+    Website inspired by <a href="https://paulgraham.com" target="_blank" rel="noopener noreferrer">paulgraham.com</a>.
+  </p>
+</BaseLayout>
+
+<style>
+  .certs li + li {
+    margin-top: 0.9rem;
+  }
+  .small {
+    font-size: 0.875rem;
+  }
+  .credit {
+    margin-top: 3rem;
+  }
+</style>
