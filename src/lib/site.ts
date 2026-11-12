@@ -1,11 +1,11 @@
 // Site-wide settings and helpers. Edit SITE to change name/intro/contact.
 export const SITE = {
-  name: 'Your Name', // TODO: real name
-  title: 'Your Name — Portfolio', // TODO
+  name: 'Raymond Kim',
+  title: 'Raymond Kim — Portfolio',
   description: 'TODO: one-sentence description used in search results and link previews.',
-  email: 'you@example.com', // TODO
-  linkedin: 'https://www.linkedin.com/in/your-handle', // TODO
-  github: 'https://github.com/your-handle', // TODO
+  email: 'hkapray@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/raykim02',
+  github: 'https://github.com/rayk1m02',
 };
 
 export const NAV = [
