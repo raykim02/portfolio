@@ -1,13 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 import { SITE } from '../lib/site';
+// TODO: swap for a real photo, e.g. '../assets/profile.jpg'
+import profile from '../assets/profile-placeholder.svg';
 ---
 
 <BaseLayout>
   <h1>{SITE.name}</h1>
+  <Image src={profile} alt={`Photo of ${SITE.name}`} width={160} height={160} class="profile" />
   <!-- TODO: replace with your own 2–3 sentence intro -->
   <p>
     TODO: Short intro. Who you are, what you do now, and what you're building toward. Two or three
     sentences is plenty.
   </p>
 </BaseLayout>
+
+<style>
+  .profile {
+    display: block;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    margin: 0 0 1em;
+  }
+</style>

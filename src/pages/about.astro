@@ -38,7 +38,7 @@ import { SITE, url } from '../lib/site';
       const email = btn.dataset.email ?? '';
       try {
         await navigator.clipboard.writeText(email);
-        if (status) status.textContent = '(copied!)';
+        if (status) status.textContent = '(copied)';
       } catch {
         // Clipboard blocked: select the text so the visitor can copy it manually.
         const range = document.createRange();
