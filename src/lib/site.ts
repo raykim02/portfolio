@@ -5,7 +5,7 @@ export const SITE = {
   description: 'TODO: one-sentence description used in search results and link previews.',
   email: 'hkapray@gmail.com',
   linkedin: 'https://www.linkedin.com/in/raykim02',
-  github: 'https://github.com/rayk1m02',
+  github: 'https://github.com/raykim02',
 };
 
 export const NAV = [

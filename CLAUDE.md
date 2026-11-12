@@ -35,11 +35,11 @@ Audience: **tech recruiters and hiring managers**. They skim, so every page must
 - **Plain CSS**: one global stylesheet + scoped component styles. No Tailwind, no UI framework, no React
 - `@astrojs/sitemap` for `sitemap-index.xml`
 - **Analytics:** cookie-free; GoatCounter by default (provider still open, see Open decisions). Single `<script>` in the base layout, prod builds only, and only rendered when `PUBLIC_GOATCOUNTER_CODE` is set (repo variable `GOATCOUNTER_CODE` in CI)
-- **Hosting:** GitHub Pages via GitHub Actions (`withastro/action`), repo **github.com/rayk1m02/portfolio**
+- **Hosting:** GitHub Pages via GitHub Actions (`withastro/action`), repo **github.com/raykim02/portfolio**
 
 ## Base path (important)
 The repo is named `portfolio`, so until a custom domain exists the site is served at
-`https://rayk1m02.github.io/portfolio/` and `astro.config.mjs` sets `base: '/portfolio'`.
+`https://raykim02.github.io/portfolio/` and `astro.config.mjs` sets `base: '/portfolio'`.
 - **Never hard-code internal links.** Always wrap them with `url()` from `src/lib/site.ts` (e.g. `href={url('/projects')}`), and use `astro:assets` for images so their paths are base-aware.
 - When the custom domain goes live: set `site` to the domain, delete `base`, add `public/CNAME`. Nothing else should need to change.
 
@@ -146,7 +146,7 @@ npm run preview   # serve the built site locally
 - Push to `main` → GitHub Actions builds with `withastro/action` → deploys to GitHub Pages.
 - Repo Settings → Pages → Source: **GitHub Actions** (one-time setup).
 - Optional: repo Settings → Variables → `GOATCOUNTER_CODE` to enable analytics.
-- Custom domain (to be purchased): add `public/CNAME` with the domain, set DNS (apex A/AAAA records to GitHub Pages IPs, `www` CNAME to `rayk1m02.github.io`), enable "Enforce HTTPS", then update `site` and remove `base` in `astro.config.mjs` (see Base path).
+- Custom domain (to be purchased): add `public/CNAME` with the domain, set DNS (apex A/AAAA records to GitHub Pages IPs, `www` CNAME to `raykim02.github.io`), enable "Enforce HTTPS", then update `site` and remove `base` in `astro.config.mjs` (see Base path).
 
 ## Open decisions
 - [ ] Accent color hue (light + dark variants)
