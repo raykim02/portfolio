@@ -1,7 +1,7 @@
 // Site-wide settings and helpers. Edit SITE to change name/intro/contact.
 export const SITE = {
   name: 'Raymond Kim',
-  title: 'Raymond Kim — Portfolio',
+  title: 'Raymond Kim',
   description: 'TODO: one-sentence description used in search results and link previews.',
   email: 'hkapray@gmail.com',
   linkedin: 'https://www.linkedin.com/in/raykim02',
