@@ -8,7 +8,7 @@ const certs = (await getCollection('certifications')).sort(
 );
 ---
 
-<BaseLayout title="Other" description="Certifications, coursework, and interests.">
+<BaseLayout title="Other" description="Certifications and coursework.">
   <h1>Other</h1>
 
   <h2>Certifications &amp; coursework</h2>
@@ -35,14 +35,6 @@ const certs = (await getCollection('certifications')).sort(
       <p class="muted">Coming soon.</p>
     )
   }
-
-  <h2>Interests</h2>
-  <!-- TODO: replace with your own interests -->
-  <ul>
-    <li>Interest one</li>
-    <li>Interest two</li>
-    <li>Interest three</li>
-  </ul>
 
   <p class="muted small credit">
     Website inspired by <a href="https://paulgraham.com" target="_blank" rel="noopener noreferrer">paulgraham.com</a>.

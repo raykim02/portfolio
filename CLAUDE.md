@@ -26,7 +26,7 @@ Audience: **tech recruiters and hiring managers**. They skim, so every page must
 | `/experience` | One plain-text entry per role: small inline logo + company (bold), title, dates, domain, "Tools: a, b, c". **No impact bullets**; those live in the resume |
 | `/projects` | List, newest first: title, one-line summary, Courier tech tags, date (Mon YYYY) with plain-text "(in progress)" when applicable. No badges |
 | `/projects/<slug>` | Description, visuals (screenshots, architecture diagrams, chart images), tags, GitHub link |
-| `/other` | Certifications/coursework (with credential links) and interests |
+| `/other` | Certifications/coursework (with credential links). Interests live in one line on `/about` |
 
 ## Tech stack
 - **Astro 7**, static output, TypeScript strict (`npm run build` runs `astro check` first)
@@ -155,5 +155,5 @@ npm run preview   # serve the built site locally
 - [ ] Name, intro copy, bio text, email, LinkedIn (`src/lib/site.ts`, `index.astro`, `about.astro`)
 - [ ] Company name, logo, start date, tools (`src/content/experience/current-role.md`)
 - [ ] Which existing personal projects to feature first (replace `projects/example-pipeline/`)
-- [ ] Certifications and interests to list (replace `certifications/example-cert.md`, `other.astro`)
+- [ ] Certifications to list (replace `certifications/example-cert.md`)
 - [ ] `public/resume.pdf` and a real `public/og-default.png`

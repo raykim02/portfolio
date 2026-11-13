@@ -2,7 +2,8 @@
 export const SITE = {
   name: 'Raymond Kim',
   title: 'Raymond Kim',
-  description: 'TODO: one-sentence description used in search results and link previews.',
+  description:
+    'Database developer in Austin, TX, with experience across the data center, finance, and oil and gas industries. Moving into data engineering.',
   email: 'hkapray@gmail.com',
   linkedin: 'https://www.linkedin.com/in/raykim02',
   github: 'https://github.com/raykim02',
