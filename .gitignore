@@ -21,3 +21,6 @@ Thumbs.db
 
 # private files (resume etc.) - never commit
 private/
+
+# local-only project notes for Claude Code - not committed
+CLAUDE.md
