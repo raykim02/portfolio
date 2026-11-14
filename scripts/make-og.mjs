@@ -18,3 +18,12 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
 
 const info = await sharp(Buffer.from(svg)).png().toFile(new URL('../public/og-default.png', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 console.log(`og-default.png written (${info.width}x${info.height}, accent ${accent})`);
+
+// PNG favicon fallbacks for browsers that ignore SVG favicons (e.g. Safari).
+// Rendered from public/favicon.svg (light-mode colors), so keep that file's accent in sync first.
+const pub = (f) => new URL(`../public/${f}`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
+const favSvg = readFileSync(pub('favicon.svg'));
+for (const [file, size] of [['favicon-32.png', 32], ['apple-touch-icon.png', 180]]) {
+  await sharp(favSvg, { density: (72 * size) / 32 }).resize(size, size).png().toFile(pub(file));
+  console.log(`${file} written (${size}x${size})`);
+}

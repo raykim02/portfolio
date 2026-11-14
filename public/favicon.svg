@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- "RK" monogram. Fill colors follow --accent in global.css; update both when the accent changes. -->
+  <!-- "RK" monogram. Fill colors follow the accent token in global.css; update both when the accent changes. -->
   <style>
     rect { fill: #2d6a3e; }
     @media (prefers-color-scheme: dark) { rect { fill: #7cc48b; } text { fill: #141414; } }
