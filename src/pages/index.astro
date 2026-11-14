@@ -1,9 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import { SITE } from '../lib/site';
+import { getCollection } from 'astro:content';
+import { SITE, url } from '../lib/site';
 // TODO: swap for a real photo, e.g. '../assets/profile.jpg'
 import profile from '../assets/profile-placeholder.svg';
+
+// Newest non-draft project, so this link updates itself when a project is added.
+const [latest] = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 ---
 
 <BaseLayout>
@@ -14,6 +20,13 @@ import profile from '../assets/profile-placeholder.svg';
     model and own the reporting that executives and operations teams rely on daily. I'm actively looking
     to expand into the modern data stack and am building projects along the way.
   </p>
+  {
+    latest && (
+      <p>
+        Latest project: <a href={url(`/projects/${latest.id}`)}>{latest.data.title} →</a>
+      </p>
+    )
+  }
 </BaseLayout>
 
 <style>

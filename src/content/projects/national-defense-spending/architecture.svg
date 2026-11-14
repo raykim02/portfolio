@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 470" width="600" height="470" role="img" aria-labelledby="t">
-  <title id="t">Pipeline architecture: USASpending bulk files, Python extract, S3, Redshift Serverless, dbt, Power BI, orchestrated monthly by Airflow</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 452" width="420" height="452" role="img" aria-labelledby="t">
+  <title id="t">Pipeline architecture: USASpending bulk files, Python extract, S3, Redshift Serverless, dbt, Power BI. Airflow runs extract, load, and dbt monthly.</title>
   <style>
     svg { --fg: #111; --muted: #555; --line: #888; --bg: #fff; }
     @media (prefers-color-scheme: dark) {
       svg { --fg: #e6e6e6; --muted: #a8a8a8; --line: #777; --bg: #111; }
     }
     rect { fill: var(--bg); stroke: var(--line); stroke-width: 1; }
-    text { font-family: Verdana, Geneva, Tahoma, sans-serif; fill: var(--fg); font-size: 13px; }
-    .sub { fill: var(--muted); font-size: 11px; }
+    text { font-family: Verdana, Geneva, Tahoma, sans-serif; fill: var(--fg); font-size: 14px; }
+    .sub { fill: var(--muted); font-size: 12px; }
     .arrow { stroke: var(--line); stroke-width: 1.2; fill: none; marker-end: url(#a); }
-    .dash { stroke: var(--line); stroke-width: 1; fill: none; stroke-dasharray: 4 4; }
+    .bracket { stroke: var(--line); stroke-width: 1; fill: none; stroke-dasharray: 4 4; }
     marker path { fill: var(--line); }
   </style>
   <defs>
@@ -18,43 +18,38 @@
     </marker>
   </defs>
 
-  <!-- main column -->
-  <rect x="20" y="10" width="360" height="52" />
-  <text x="36" y="32">USASpending.gov bulk files</text>
-  <text class="sub" x="36" y="50">full file per fiscal year + monthly change files</text>
+  <!-- Main column: 6 boxes, 340 wide, 52 tall, 24 apart -->
+  <rect x="1" y="1" width="340" height="52" />
+  <text x="14" y="23">USASpending.gov bulk files</text>
+  <text class="sub" x="14" y="42">yearly full files + monthly changes</text>
 
-  <rect x="20" y="88" width="360" height="52" />
-  <text x="36" y="110">Extract (Python)</text>
-  <text class="sub" x="36" y="128">download, filter to defense scope, trim to 65 columns</text>
+  <rect x="1" y="77" width="340" height="52" />
+  <text x="14" y="99">Extract (Python)</text>
+  <text class="sub" x="14" y="118">download, filter to scope, trim columns</text>
 
-  <rect x="20" y="166" width="360" height="52" />
-  <text x="36" y="188">Amazon S3</text>
-  <text class="sub" x="36" y="206">raw zips + prestaged CSVs</text>
+  <rect x="1" y="153" width="340" height="52" />
+  <text x="14" y="175">Amazon S3</text>
+  <text class="sub" x="14" y="194">raw zips + prestaged CSVs</text>
 
-  <rect x="20" y="244" width="360" height="52" />
-  <text x="36" y="266">Redshift Serverless</text>
-  <text class="sub" x="36" y="284">COPY into raw tables, idempotent reloads</text>
+  <rect x="1" y="229" width="340" height="52" />
+  <text x="14" y="251">Redshift Serverless</text>
+  <text class="sub" x="14" y="270">COPY into raw tables, idempotent</text>
 
-  <rect x="20" y="322" width="360" height="52" />
-  <text x="36" y="344">dbt</text>
-  <text class="sub" x="36" y="362">staging → star schema (SCD2) → reporting tables</text>
+  <rect x="1" y="305" width="340" height="52" />
+  <text x="14" y="327">dbt</text>
+  <text class="sub" x="14" y="346">staging → star schema → reporting</text>
 
-  <rect x="20" y="400" width="360" height="52" />
-  <text x="36" y="422">Power BI</text>
-  <text class="sub" x="36" y="440">six-page dashboard</text>
+  <rect x="1" y="381" width="340" height="52" />
+  <text x="14" y="403">Power BI</text>
+  <text class="sub" x="14" y="422">six-page dashboard</text>
 
-  <path class="arrow" d="M200,62 V86" />
-  <path class="arrow" d="M200,140 V164" />
-  <path class="arrow" d="M200,218 V242" />
-  <path class="arrow" d="M200,296 V320" />
-  <path class="arrow" d="M200,374 V398" />
+  <path class="arrow" d="M171,53 V75" />
+  <path class="arrow" d="M171,129 V151" />
+  <path class="arrow" d="M171,205 V227" />
+  <path class="arrow" d="M171,281 V303" />
+  <path class="arrow" d="M171,357 V379" />
 
-  <!-- orchestrator -->
-  <rect x="430" y="220" width="150" height="52" />
-  <text x="446" y="242">Airflow</text>
-  <text class="sub" x="446" y="260">Docker, monthly</text>
-
-  <path class="dash" d="M430,246 H405 V114 H382" />
-  <path class="dash" d="M405,246 V270 H382" />
-  <path class="dash" d="M405,246 V348 H382" />
+  <!-- Airflow: a narrow bracket spanning extract → dbt, label rotated so the diagram stays narrow -->
+  <path class="bracket" d="M350,103 H366 V331 H350" />
+  <text class="sub" transform="translate(392 217) rotate(90)" text-anchor="middle">Airflow · monthly</text>
 </svg>

@@ -22,7 +22,7 @@ const roles = (await getCollection('experience')).sort(
         </p>
         <p>
           {data.title}{' '}
-          <span class="muted">
+          <span class="muted dates">
             · {monthYear(data.start)} – {data.end ? monthYear(data.end) : 'Present'}
           </span>
         </p>
@@ -46,6 +46,10 @@ const roles = (await getCollection('experience')).sort(
   }
   .role p {
     margin: 0;
+  }
+  /* Keep a date range on one line; the whole range wraps instead. */
+  .dates {
+    white-space: nowrap;
   }
   .company {
     display: flex;

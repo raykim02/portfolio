@@ -13,7 +13,7 @@ Audience: **tech recruiters and hiring managers**. They skim, so every page must
 - **Layout is left-aligned** (not centered) and kept plain and old-web: no cards, rounded boxes, or shadows.
 - **Color:** neutral black/white base + **one accent color** (links, headings, active nav). Light and dark variants, switched by `@media (prefers-color-scheme: dark)`. **No manual toggle.**
   - All colors live as CSS custom properties in `src/styles/global.css`: `--bg`, `--fg`, `--muted`, `--border`, `--accent`.
-  - Accent hue is **not yet decided**; use a placeholder token and keep it a single-line change.
+  - Accent is **forest green**: `#2d6a3e` (light) / `#7cc48b` (dark). Keep it a single-token change; if it changes, also update `public/favicon.svg` and run `node scripts/make-og.mjs`.
   - Text and accent must meet WCAG AA contrast in both modes.
 - **Mobile-first**, no horizontal scroll, images `max-width: 100%`.
 - **No client-side JavaScript** except the analytics snippet and the tiny click-to-copy script for the email on `/about` (owner asked for copy-to-clipboard instead of `mailto:`; it falls back to selecting the text).
@@ -21,7 +21,7 @@ Audience: **tech recruiters and hiring managers**. They skim, so every page must
 ## Pages / sections
 | Route | Content |
 |---|---|
-| `/` | Name + 2–3 sentence intro only (navigation lives in the sidebar; no duplicate link list) |
+| `/` | Name + 2–3 sentence intro, then one "Latest project: <title> →" link (newest non-draft project, automatic). No other link list (navigation lives in the sidebar) |
 | `/about` | General bio, contact (email click-to-copy, LinkedIn, GitHub), "Resume (PDF)" link styled as a normal link but with no `href` yet (see Resume and personal info) |
 | `/experience` | One plain-text entry per role: small inline logo + company (bold), title, dates, domain, "Tools: a, b, c". **No impact bullets**; those live in the resume. An "Education" section (Wheaton College) sits at the bottom |
 | `/projects` | List, newest first: title, one-line summary, Courier tech tags, date (Mon YYYY) with plain-text "(in progress)" when applicable. No badges |
@@ -51,10 +51,11 @@ portfolio/
 ├─ package.json / tsconfig.json
 ├─ .env.example                  # PUBLIC_GOATCOUNTER_CODE
 ├─ .github/workflows/deploy.yml  # build + deploy to Pages on push to main
+├─ scripts/make-og.mjs          # builds public/og-default.png from the --accent in global.css
 ├─ private/                      # gitignored; never commit (resume source: Raymond_Kim_Resume.pdf)
 ├─ public/
 │  ├─ resume.pdf                 # not yet; see Resume and personal info
-│  ├─ og-default.png             # 1200x630 social preview image (placeholder)
+│  ├─ og-default.png             # 1200x630 text-only share preview; regenerate with `node scripts/make-og.mjs`
 │  ├─ favicon.svg
 │  └─ CNAME                      # add once custom domain is purchased
 └─ src/
@@ -77,6 +78,7 @@ portfolio/
    │  ├─ projects/index.astro
    │  ├─ projects/[slug].astro
    │  ├─ other.astro
+   │  ├─ 404.astro               # custom not-found page (GitHub Pages serves dist/404.html)
    │  └─ robots.txt.ts           # generated robots.txt pointing at the sitemap
    └─ styles/global.css          # color tokens (light + dark), base typography, layout
 ```
@@ -131,7 +133,7 @@ badge: ../../assets/badges/<file>.png   # optional; small image beside the cert
 - **Never publish my phone number** anywhere on the site.
 - **No resume download, link target, or embedded resume for now.** The "Resume (PDF)" text on `/about` stays, styled as a normal link, but has no `href` until I upload `public/resume.pdf`.
 - **Never commit anything inside `private/`.**
-- **Certificate files** (PDFs, badge images) also live in `private/` and are never committed. The site lists certifications as **text** (title, issuer, date) linked to the **official verification URL** (Udemy, TryHackMe, dbt credentials, etc.). A cert with no verification URL is listed without a link. A badge image is only copied into `src/assets/badges/` with my approval (currently, on trial: dbt Fundamentals badge plus TryHackMe and Udemy logos supplied by me).
+- **Certificate files** (PDFs, badge images) also live in `private/` and are never committed. The site lists certifications as **text** (title, issuer, date) linked to the **official verification URL** (Udemy, TryHackMe, dbt credentials, etc.). A cert with no verification URL is listed without a link. A badge image is only copied into `src/assets/badges/` with my approval (currently: dbt Fundamentals badge and TryHackMe logo supplied by me). Udemy certificates were dropped as not data-engineering relevant.
 - When I update the resume, re-read it and update the site to match, without removing the Project Coordinator role or the extra GitHub projects.
 - Keep internal system names off the site even if the resume mentions them (e.g. Equinix's internal platform name).
 
@@ -162,9 +164,10 @@ npm run preview   # serve the built site locally
 - Custom domain (to be purchased): add `public/CNAME` with the domain, set DNS (apex A/AAAA records to GitHub Pages IPs, `www` CNAME to `raykim02.github.io`), enable "Enforce HTTPS", then update `site` and remove `base` in `astro.config.mjs` (see Base path).
 
 ## Open decisions
-- [ ] Accent color hue (light + dark variants)
 - [ ] Analytics provider: GoatCounter (default) vs Cloudflare Web Analytics
 - [ ] Domain name + registrar
 - [ ] Which additional GitHub projects to feature after National Defense Spending, and in what order
 - [ ] Keep or drop the cert badge/logo images on `/other`
-- [ ] Upload `public/resume.pdf` and give the About link its `href`; a real `public/og-default.png`
+- [ ] Upload `public/resume.pdf` (phone number removed) and give the About link its `href` (owner: by end of next week; no applications until then)
+- [ ] Profile photo for the home page (replace `assets/profile-placeholder.svg`)
+- [ ] "What I learned" section for the National Defense Spending project page (text from me)

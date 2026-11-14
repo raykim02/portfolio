@@ -1,12 +1,12 @@
 /* ---------- Tokens ----------
-   One accent color, light + dark. The accent hue is still undecided:
+   One accent color, light + dark. Accent is forest green. To change it,
    change --accent (both modes) and nothing else. Keep WCAG AA contrast. */
 :root {
   --bg: #ffffff;
   --fg: #1a1a1a;
   --muted: #5f5f5f;
   --border: #e2e2e2;
-  --accent: #1f5fa8; /* PLACEHOLDER accent (light) */
+  --accent: #2d6a3e; /* forest green, 6.5:1 on --bg */
 
   --font-sans: Verdana, Geneva, Tahoma, sans-serif;
   --font-mono: 'Courier New', Courier, monospace;
@@ -22,7 +22,7 @@
     --fg: #e8e8e8;
     --muted: #a3a3a3;
     --border: #2e2e2e;
-    --accent: #7fb2ef; /* PLACEHOLDER accent (dark) */
+    --accent: #7cc48b; /* forest green, 8.9:1 on --bg */
   }
 }
 

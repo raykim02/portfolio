@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- "RK" monogram. Fill colors follow --accent in global.css; update both when the accent changes. -->
   <style>
-    rect { fill: #1f5fa8; }
-    @media (prefers-color-scheme: dark) { rect { fill: #7fb2ef; } }
+    rect { fill: #2d6a3e; }
+    @media (prefers-color-scheme: dark) { rect { fill: #7cc48b; } text { fill: #141414; } }
   </style>
-  <rect width="32" height="32" rx="6"/>
-  <text x="16" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#ffffff">/</text>
+  <rect width="32" height="32" rx="4"/>
+  <text x="16" y="21.5" text-anchor="middle" font-family="Verdana, Geneva, Tahoma, sans-serif" font-size="14" font-weight="700" letter-spacing="-0.5" fill="#ffffff">RK</text>
 </svg>
