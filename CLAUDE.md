@@ -163,7 +163,7 @@ npm run preview   # serve the built site locally
 - [ ] Accent color hue (light + dark variants)
 - [ ] Analytics provider: GoatCounter (default) vs Cloudflare Web Analytics
 - [ ] Domain name + registrar
-- [ ] Project Coordinator role details (company, location, dates, what I did); optional company logos
+- [ ] Company logos (optional; all roles use `assets/logos/placeholder.svg` for now)
 - [ ] Which additional GitHub projects to feature after National Defense Spending, and in what order
 - [ ] Certifications to list (replace `certifications/example-cert.md`)
 - [ ] Upload `public/resume.pdf` and give the About link its `href`; a real `public/og-default.png`
