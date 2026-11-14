@@ -129,7 +129,7 @@ badge: ../../assets/badges/<file>.png   # optional; small image beside the cert
 ## Resume and personal info
 - My resume is at `private/Raymond_Kim_Resume.pdf` (gitignored). It is the source of truth for experience, project, and skills content, but it is **not the complete list**.
 - The site's Experience section also includes a **Project Coordinator** role that is not on the resume (college part-time job, about a year; started before the Equinix internship and ended before First Trust). Its details come from me, not the resume. Never invent or guess them.
-- The site's Projects section includes additional GitHub projects (github.com/raykim02) not on the resume, described from each repo's README. **National Defense Spending is featured first.** Confirmed so far: National Defense Spending only (more to be chosen by me).
+- The site's Projects section includes additional GitHub projects (github.com/raykim02) not on the resume, described from each repo's README. **National Defense Spending is featured first.** Confirmed so far: National Defense Spending, `de-market-analysis`, `eia-steo-analysis` (more may be added by me). The list sorts by `date`, so keep National Defense Spending's date the newest.
 - **Never publish my phone number** anywhere on the site.
 - **No resume download, link target, or embedded resume for now.** The "Resume (PDF)" text on `/about` stays, styled as a normal link, but has no `href` until I upload `public/resume.pdf`.
 - **Never commit anything inside `private/`.**
@@ -166,7 +166,6 @@ npm run preview   # serve the built site locally
 ## Open decisions
 - [ ] Analytics provider: GoatCounter (default) vs Cloudflare Web Analytics
 - [ ] Domain name + registrar
-- [ ] Which additional GitHub projects to feature after National Defense Spending, and in what order
 - [ ] Keep or drop the cert badge/logo images on `/other`
 - [ ] Upload `public/resume.pdf` (phone number removed) and give the About link its `href` (owner: by end of next week; no applications until then)
 - [ ] Profile photo for the home page (replace `assets/profile-placeholder.svg`)
