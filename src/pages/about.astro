@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../lib/site';
+import { SITE, url } from '../lib/site';
 ---
 
 <BaseLayout title="About" description={`About ${SITE.name}: background, resume, and contact.`}>
@@ -13,7 +13,7 @@ import { SITE } from '../lib/site';
   </p>
 
   <h2>Resume</h2>
-  <p>Resume (PDF) available on request.</p>
+  <p><a href={url('/Raymond_Kim_Resume.pdf')} target="_blank" rel="noopener noreferrer">Resume (PDF)</a></p>
 
   <h2>Contact</h2>
   <ul class="plain-list contact">
