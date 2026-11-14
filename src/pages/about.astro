@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, url } from '../lib/site';
+import { SITE } from '../lib/site';
 ---
 
 <BaseLayout title="About" description={`About ${SITE.name}: background, resume, and contact.`}>
@@ -13,7 +13,8 @@ import { SITE, url } from '../lib/site';
   </p>
 
   <h2>Resume</h2>
-  <p><a href={url('/resume.pdf')} target="_blank" rel="noopener noreferrer">Resume (PDF)</a></p>
+  <!-- TODO: import url from ../lib/site and add href={url('/resume.pdf')} target="_blank" rel="noopener noreferrer" once public/resume.pdf is uploaded -->
+  <p><a class="resume-link">Resume (PDF)</a></p>
 
   <h2>Contact</h2>
   <ul class="plain-list contact">
@@ -75,6 +76,12 @@ import { SITE, url } from '../lib/site';
   }
   .copy-email:hover {
     text-decoration-thickness: 2px;
+  }
+  /* No href yet, so style it like a normal link by hand. */
+  .resume-link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
   .copied {
     font-size: 0.85rem;

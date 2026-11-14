@@ -9,7 +9,7 @@ const roles = (await getCollection('experience')).sort(
 );
 ---
 
-<BaseLayout title="Experience" description="Work experience, tools, and domain.">
+<BaseLayout title="Experience" description="Work experience, tools, domain, and education.">
   <h1>Experience</h1>
 
   {
@@ -31,6 +31,9 @@ const roles = (await getCollection('experience')).sort(
       </div>
     ))
   }
+
+  <h2>Education</h2>
+  <p><b>Wheaton College</b>, B.S. Computer Science, Economics minor <span class="muted">· May 2024</span></p>
 </BaseLayout>
 
 <style>

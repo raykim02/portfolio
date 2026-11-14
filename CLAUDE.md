@@ -2,7 +2,7 @@
 
 ## Purpose & audience
 Personal portfolio supporting a career move into **data engineering**.
-All personal details (name, job title, company, industry, contact info) are **placeholders marked `TODO`** for now. Do not fill in real personal info unless the owner explicitly provides it.
+Personal details come from the owner or the resume (see **Resume and personal info**). Never invent personal info; anything still unknown stays a `TODO` placeholder.
 Audience: **tech recruiters and hiring managers**. They skim, so every page must be fast to scan, keyword-rich (tools/tech), and load instantly.
 
 ## Design direction
@@ -22,8 +22,8 @@ Audience: **tech recruiters and hiring managers**. They skim, so every page must
 | Route | Content |
 |---|---|
 | `/` | Name + 2–3 sentence intro only (navigation lives in the sidebar; no duplicate link list) |
-| `/about` | General bio, contact (email click-to-copy, LinkedIn, GitHub), "Resume (PDF)" link to `/resume.pdf` opening in a new tab |
-| `/experience` | One plain-text entry per role: small inline logo + company (bold), title, dates, domain, "Tools: a, b, c". **No impact bullets**; those live in the resume |
+| `/about` | General bio, contact (email click-to-copy, LinkedIn, GitHub), "Resume (PDF)" link styled as a normal link but with no `href` yet (see Resume and personal info) |
+| `/experience` | One plain-text entry per role: small inline logo + company (bold), title, dates, domain, "Tools: a, b, c". **No impact bullets**; those live in the resume. An "Education" section (Wheaton College) sits at the bottom |
 | `/projects` | List, newest first: title, one-line summary, Courier tech tags, date (Mon YYYY) with plain-text "(in progress)" when applicable. No badges |
 | `/projects/<slug>` | Description, visuals (screenshots, architecture diagrams, chart images), tags, GitHub link |
 | `/other` | Certifications/coursework (with credential links). Interests live in one line on `/about` |
@@ -51,8 +51,9 @@ portfolio/
 ├─ package.json / tsconfig.json
 ├─ .env.example                  # PUBLIC_GOATCOUNTER_CODE
 ├─ .github/workflows/deploy.yml  # build + deploy to Pages on push to main
+├─ private/                      # gitignored; never commit (resume source: Raymond_Kim_Resume.pdf)
 ├─ public/
-│  ├─ resume.pdf                 # TODO: add (linked from About)
+│  ├─ resume.pdf                 # not yet; see Resume and personal info
 │  ├─ og-default.png             # 1200x630 social preview image (placeholder)
 │  ├─ favicon.svg
 │  └─ CNAME                      # add once custom domain is purchased
@@ -122,6 +123,16 @@ status: earned | in-progress   # optional
 - Every project page should answer: what problem, how it's built (diagram), what tools, what I learned, and link to GitHub.
 - Alt text on every image.
 
+## Resume and personal info
+- My resume is at `private/Raymond_Kim_Resume.pdf` (gitignored). It is the source of truth for experience, project, and skills content, but it is **not the complete list**.
+- The site's Experience section also includes a **Project Coordinator** role that is not on the resume (college part-time job, about a year; started before the Equinix internship and ended before First Trust). Its details come from me, not the resume. Never invent or guess them.
+- The site's Projects section includes additional GitHub projects (github.com/raykim02) not on the resume, described from each repo's README. **National Defense Spending is featured first.** Confirmed so far: National Defense Spending only (more to be chosen by me).
+- **Never publish my phone number** anywhere on the site.
+- **No resume download, link target, or embedded resume for now.** The "Resume (PDF)" text on `/about` stays, styled as a normal link, but has no `href` until I upload `public/resume.pdf`.
+- **Never commit anything inside `private/`.**
+- When I update the resume, re-read it and update the site to match, without removing the Project Coordinator role or the extra GitHub projects.
+- Keep internal system names off the site even if the resume mentions them (e.g. Equinix's internal platform name).
+
 ## Adding a project
 1. Create `src/content/projects/<slug>/index.md` with the frontmatter above.
 2. Put screenshots, exported diagrams (Excalidraw/draw.io → SVG/PNG), and chart images in the same folder; reference them relatively.
@@ -152,8 +163,7 @@ npm run preview   # serve the built site locally
 - [ ] Accent color hue (light + dark variants)
 - [ ] Analytics provider: GoatCounter (default) vs Cloudflare Web Analytics
 - [ ] Domain name + registrar
-- [ ] Name, intro copy, bio text, email, LinkedIn (`src/lib/site.ts`, `index.astro`, `about.astro`)
-- [ ] Company name, logo, start date, tools (`src/content/experience/current-role.md`)
-- [ ] Which existing personal projects to feature first (replace `projects/example-pipeline/`)
+- [ ] Project Coordinator role details (company, location, dates, what I did); optional company logos
+- [ ] Which additional GitHub projects to feature after National Defense Spending, and in what order
 - [ ] Certifications to list (replace `certifications/example-cert.md`)
-- [ ] `public/resume.pdf` and a real `public/og-default.png`
+- [ ] Upload `public/resume.pdf` and give the About link its `href`; a real `public/og-default.png`
