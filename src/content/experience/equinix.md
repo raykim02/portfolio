@@ -1,6 +1,6 @@
 ---
 company: Equinix
-logo: ../../assets/logos/placeholder.svg # TODO: replace with the real logo
+logo: ../../assets/logos/equinix.jpg
 title: Product Management Intern
 start: 2022-05
 end: 2022-08

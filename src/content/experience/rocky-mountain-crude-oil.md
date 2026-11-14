@@ -1,6 +1,6 @@
 ---
 company: Rocky Mountain Crude Oil
-logo: ../../assets/logos/placeholder.svg # TODO: replace with the real logo
+logo: ../../assets/logos/rmco.jpg
 title: Database Developer
 start: 2025-03
 tools: [SQL Server, T-SQL, SSRS, TMW Suite]

@@ -34,13 +34,15 @@ const experience = defineCollection({
 
 const certifications = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/certifications' }),
-  schema: z.object({
-    name: z.string(),
-    issuer: z.string(),
-    date: z.coerce.date(),
-    url: z.url().optional(),
-    status: z.enum(['earned', 'in-progress']).default('earned'),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      issuer: z.string(),
+      date: z.coerce.date(),
+      url: z.url().optional(),
+      status: z.enum(['earned', 'in-progress']).default('earned'),
+      badge: image().optional(), // small badge image shown beside the cert
+    }),
 });
 
 export const collections = { projects, experience, certifications };

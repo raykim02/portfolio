@@ -112,6 +112,7 @@ issuer: string
 date: YYYY-MM
 url: https://...           # optional credential link
 status: earned | in-progress   # optional
+badge: ../../assets/badges/<file>.png   # optional; small image beside the cert
 ```
 
 ## Content rules
@@ -130,6 +131,7 @@ status: earned | in-progress   # optional
 - **Never publish my phone number** anywhere on the site.
 - **No resume download, link target, or embedded resume for now.** The "Resume (PDF)" text on `/about` stays, styled as a normal link, but has no `href` until I upload `public/resume.pdf`.
 - **Never commit anything inside `private/`.**
+- **Certificate files** (PDFs, badge images) also live in `private/` and are never committed. The site lists certifications as **text** (title, issuer, date) linked to the **official verification URL** (Udemy, TryHackMe, dbt credentials, etc.). A cert with no verification URL is listed without a link. A badge image is only copied into `src/assets/badges/` with my approval (currently, on trial: dbt Fundamentals badge plus TryHackMe and Udemy logos supplied by me).
 - When I update the resume, re-read it and update the site to match, without removing the Project Coordinator role or the extra GitHub projects.
 - Keep internal system names off the site even if the resume mentions them (e.g. Equinix's internal platform name).
 
@@ -163,7 +165,6 @@ npm run preview   # serve the built site locally
 - [ ] Accent color hue (light + dark variants)
 - [ ] Analytics provider: GoatCounter (default) vs Cloudflare Web Analytics
 - [ ] Domain name + registrar
-- [ ] Company logos (optional; all roles use `assets/logos/placeholder.svg` for now)
 - [ ] Which additional GitHub projects to feature after National Defense Spending, and in what order
-- [ ] Certifications to list (replace `certifications/example-cert.md`)
+- [ ] Keep or drop the cert badge/logo images on `/other`
 - [ ] Upload `public/resume.pdf` and give the About link its `href`; a real `public/og-default.png`

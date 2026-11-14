@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { monthYear } from '../lib/site';
@@ -16,7 +17,8 @@ const certs = (await getCollection('certifications')).sort(
     certs.length > 0 ? (
       <ul class="plain-list certs">
         {certs.map(({ data }) => (
-          <li>
+          <li class={data.badge ? 'has-badge' : undefined}>
+            {data.badge && <Image src={data.badge} alt={`${data.name} badge`} width={40} densities={[1, 2]} class="badge" />}
             {data.url ? (
               <a href={data.url} target="_blank" rel="noopener noreferrer">
                 {data.name}
@@ -37,7 +39,7 @@ const certs = (await getCollection('certifications')).sort(
   }
 
   <h2>Languages</h2>
-  <p>Korean and Urdu. Lived in Pakistan (7 years) and Taiwan (2 years).</p>
+  <p>Korean and Urdu. Lived in Pakistan (7 yrs) and Taiwan (2 yrs).</p>
 
   <p class="muted small credit">
     Website inspired by <a href="https://paulgraham.com" target="_blank" rel="noopener noreferrer">paulgraham.com</a>.
@@ -45,6 +47,18 @@ const certs = (await getCollection('certifications')).sort(
 </BaseLayout>
 
 <style>
+  .has-badge {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    column-gap: 0.6rem;
+    align-items: center;
+  }
+  .has-badge .badge {
+    grid-row: span 2;
+    width: 40px;
+    height: auto;
+    border-radius: 5px;
+  }
   .certs li + li {
     margin-top: 0.9rem;
   }

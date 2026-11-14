@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { monthYear } from '../lib/site';
+import wheatonLogo from '../assets/logos/wheatoncollege.jpg';
 
 const roles = (await getCollection('experience')).sort(
   (a, b) => b.data.start.valueOf() - a.data.start.valueOf(),
@@ -16,14 +17,13 @@ const roles = (await getCollection('experience')).sort(
     roles.map(({ data }) => (
       <div class="role">
         <p class="company">
-          {data.logo && <Image src={data.logo} alt="" width={20} height={20} />}
+          {data.logo && <Image src={data.logo} alt="" width={24} height={24} densities={[1, 2]} />}
           <b>{data.company}</b>
         </p>
         <p>
-          {data.title}
-          <br />
+          {data.title}{' '}
           <span class="muted">
-            {monthYear(data.start)} – {data.end ? monthYear(data.end) : 'Present'}
+            · {monthYear(data.start)} – {data.end ? monthYear(data.end) : 'Present'}
           </span>
         </p>
         <p>{data.domain}</p>
@@ -33,20 +33,37 @@ const roles = (await getCollection('experience')).sort(
   }
 
   <h2>Education</h2>
-  <p><b>Wheaton College</b>, B.S. Computer Science, Economics minor <span class="muted">· May 2024</span></p>
+  <p class="company">
+    <Image src={wheatonLogo} alt="" width={24} height={24} densities={[1, 2]} />
+    <b>Wheaton College</b>, B.S. Computer Science, Economics minor <span class="muted">· May 2024</span>
+  </p>
 </BaseLayout>
 
 <style>
+  /* Each role is one tight block; space goes between roles, not lines. */
   .role + .role {
-    margin-top: 2rem;
+    margin-top: 1.4rem;
   }
   .role p {
-    margin: 0 0 0.6rem;
+    margin: 0;
+  }
+  .company {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.2rem !important;
   }
   .company img {
-    width: 20px;
-    height: 20px;
-    vertical-align: -4px;
-    margin-right: 0.4rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    flex: none;
+  }
+  h2 + .company {
+    display: block;
+  }
+  h2 + .company img {
+    vertical-align: -6px;
+    margin-right: 0.45rem;
   }
 </style>
