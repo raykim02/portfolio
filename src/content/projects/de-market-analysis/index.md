@@ -53,4 +53,4 @@ OEWS data is a 2025 snapshot and cost-of-living data lags one to two years, so c
 - **Layered dbt models.** Splitting the work into staging, intermediate, and mart models gives each layer one job, so when something breaks I know where to look.
 - **Choosing the right warehouse.** DuckDB fit this project: small data, local, and free. A cloud warehouse makes sense when scale, sharing, or scheduling require it.
 - **Combining sources.** BLS and Census use different formats, codes, and time periods, so most of the work was lining them up before any analysis.
-- **Using my own results.** The analysis shaped my job search: DC and Chicago look more appealing to me than they did before.
+- **Using my own results.** The analysis further informed my job search. Chicago stood out for its affordability, and DC for having the highest concentration of database roles of the five metros.
