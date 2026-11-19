@@ -30,4 +30,4 @@ The repo has the full outlier analysis, the correlation table by lag, and the cl
 ## What I learned
 
 - **The business behind the data.** I work in the crude oil midstream sector, and this project helped me understand the history of the Texas shale boom and gave me a foundational understanding of my company's work. It was interesting to connect the data to the stories our truck drivers tell me about their experiences through the industry's ups and downs. The data gave me a clearer picture of the business as a whole and helped me ask better questions.
-- **What I'd do differently.** This was my first data engineering project, and one file, `steo_analysis.py`, still does almost everything. Today I'd split it into smaller modules with focused functions, design it as a reusable pipeline from the start, and use it to answer more analysis questions.
+- **What I'd do differently.** This was my first data engineering project. If I did it again, I'd go beyond crude oil to other energy products like natural gas and propane, cover every U.S. region, and run it on AWS with S3, Lambda, and Athena.
