@@ -46,3 +46,11 @@ Rent as % of wage is a year of rent divided by mean wage; years to buy is home v
 - **Wages track job count more than concentration:** annual mean wage correlates more with employment count (r = 0.65) than with location quotient (r = 0.46).
 
 OEWS data is a 2025 snapshot and cost-of-living data lags one to two years, so comparisons are approximate. Full notes and caveats are in the repo.
+
+## What I learned
+
+- **Working with imperfect data.** BLS has no data engineer occupation code, so I adjusted the scope to data-adjacent roles and used the closest proxies.
+- **Layered dbt models.** Splitting the work into staging, intermediate, and mart models gives each layer one job, so when something breaks I know where to look.
+- **Choosing the right warehouse.** DuckDB fit this project: small data, local, and free. A cloud warehouse makes sense when scale, sharing, or scheduling require it.
+- **Combining sources.** BLS and Census use different formats, codes, and time periods, so most of the work was lining them up before any analysis.
+- **Using my own results.** The analysis shaped my job search: DC and Chicago look more appealing to me than they did before.

@@ -26,3 +26,8 @@ I started with an exploratory script, then refactored it into a reusable pipelin
 - **Price alone is a weak predictor of production.** Nationally, the correlation rises slightly with lag (r = 0.30 at zero lag to 0.38 at 12 months), consistent with drilling taking months. The individual plays don't follow that pattern, which suggests technology, capacity, and basin maturity matter more.
 
 The repo has the full outlier analysis, the correlation table by lag, and the cleaned data exports.
+
+## What I learned
+
+- **The business behind the data.** I work in the crude oil midstream sector, and this project taught me the history of the Texas shale boom. It gave me a foundation for understanding my company's history and the stories our drivers tell about the industry's ups and downs, and it helped me ask better, more data-driven questions about the business.
+- **What I'd do differently.** This was my first data engineering project, and one file, `steo_analysis.py`, still does almost everything. Today I'd split it into smaller modules with focused functions, design it as a reusable pipeline from the start, and use it to answer more analysis questions.

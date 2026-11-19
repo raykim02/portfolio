@@ -38,3 +38,10 @@ A six-page Power BI dashboard and written findings answer 20+ questions. A few:
 - DoD puts about 15.5% of its annual contract dollars into September, nearly double an even month.
 
 Full findings, caveats, and the query behind each answer are in the repo.
+
+## What I learned
+
+- **How federal spending is organized.** I learned how the government structures defense spending: agencies, sub-agencies, offices, and federal accounts, and how they roll up into the National Defense budget function.
+- **Idempotent reruns.** Reloading data must never create duplicate records, or totals get inflated. Tagging each file with its S3 key lets the load skip files it has already processed and pick up only new changes.
+- **SCD Type 2.** Recipients' parent companies change over time. Keeping each version instead of overwriting it attributes spending to the right company in each fiscal year, which time-series analysis depends on.
+- **Working at scale.** Handling 40M+ transactions meant loading with `COPY` through temp tables, landing everything as varchar and converting types later in dbt, and opening Redshift network access only while the pipeline needs it.
