@@ -27,8 +27,9 @@ const updated = monthYear(new Date());
     </p>
   </div>
   <p>
-    I've worked across product, software, and data: product management (data centers), software
-    engineering (finance), and database development (energy). Data engineering is where these threads
+    I've worked across product, software, and data: <span class="nowrap">product management (data centers)</span>,
+    <span class="nowrap">software engineering (finance)</span>, and
+    <span class="nowrap">database development (energy)</span>. Data engineering is where these threads
     meet, and it's what I'm pursuing next. Outside of work, I play pickup basketball and do freehand
     drawing.
   </p>
@@ -116,6 +117,10 @@ const updated = monthYear(new Date());
     width: 160px;
     height: 160px;
     object-fit: cover;
+  }
+  /* Keep each "role (industry)" phrase on one line; lines break between them. */
+  .nowrap {
+    white-space: nowrap;
   }
   .updated {
     margin-top: 3rem;
