@@ -8,6 +8,11 @@ import externalLinksNewTab from './src/lib/external-links.mjs';
 export default defineConfig({
   site: 'https://raymondkim.dev',
   trailingSlash: 'ignore',
+  // Old routes kept working after About merged into the home page and Other was renamed.
+  redirects: {
+    '/about': '/',
+    '/other': '/certifications',
+  },
   integrations: [sitemap()],
   markdown: {
     processor: satteri({ hastPlugins: [externalLinksNewTab] }),

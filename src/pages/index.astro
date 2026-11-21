@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { SITE, url } from '../lib/site';
+import { SITE, monthYear, url } from '../lib/site';
 // TODO: swap for a real photo, e.g. '../assets/profile.jpg'
 import profile from '../assets/profile-placeholder.svg';
 
@@ -10,15 +10,27 @@ import profile from '../assets/profile-placeholder.svg';
 const [latest] = (await getCollection('projects', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
+
+// Set at build time, so every deploy refreshes it.
+const updated = monthYear(new Date());
 ---
 
 <BaseLayout>
   <h1>{SITE.name}</h1>
-  <Image src={profile} alt={`Photo of ${SITE.name}`} width={160} height={160} class="profile" />
+  <p class="subtitle">{SITE.tagline}</p>
+  <div class="intro">
+    <Image src={profile} alt={`Photo of ${SITE.name}`} width={160} height={160} class="profile" />
+    <p>
+      I'm a database developer at a midstream energy company, where I built our unified data
+      model and own the reporting that executives and operations teams rely on daily. I'm actively looking
+      to expand into the modern data stack and am building projects along the way.
+    </p>
+  </div>
   <p>
-    I'm a database developer at a midstream energy company in Austin, TX, where I built our unified data
-    model and own the reporting that executives and operations teams rely on daily. I'm actively looking
-    to expand into the modern data stack and am building projects along the way.
+    I've worked across product, software, and data: product management (data centers), software
+    engineering (finance), and database development (energy). Data engineering is where these threads
+    meet, and it's what I'm pursuing next. Outside of work, I play pickup basketball and do freehand
+    drawing.
   </p>
   {
     latest && (
@@ -27,14 +39,108 @@ const [latest] = (await getCollection('projects', ({ data }) => !data.draft)).so
       </p>
     )
   }
+
+  <h2>Resume</h2>
+  <p><a href={url('/Raymond_Kim_Resume.pdf')} target="_blank" rel="noopener noreferrer">Resume (PDF)</a></p>
+
+  <h2>Contact</h2>
+  <ul class="plain-list contact">
+    <li>
+      Email: <button type="button" class="copy-email" data-email={SITE.email} title="Copy email address">{SITE.email}</button>
+      <span class="copied muted" role="status" aria-live="polite">(click to copy)</span>
+    </li>
+    <li>
+      LinkedIn: <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">{SITE.linkedin.replace(/^https?:\/\/(www\.)?/, '')}</a>
+    </li>
+    <li>
+      GitHub: <a href={SITE.github} target="_blank" rel="noopener noreferrer">{SITE.github.replace(/^https?:\/\//, '')}</a>
+    </li>
+  </ul>
+
+  <p class="updated">Updated {updated}</p>
 </BaseLayout>
 
+<script>
+  // Click the email to copy it instead of opening a mail app.
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.copy-email')) {
+    const status = btn.nextElementSibling as HTMLElement | null;
+    const hint = status?.textContent ?? '';
+    let timer: number | undefined;
+    btn.addEventListener('click', async () => {
+      const email = btn.dataset.email ?? '';
+      try {
+        await navigator.clipboard.writeText(email);
+        if (status) status.textContent = '(copied)';
+      } catch {
+        // Clipboard blocked: select the text so the visitor can copy it manually.
+        const range = document.createRange();
+        range.selectNodeContents(btn);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+        if (status) status.textContent = '(press Ctrl+C to copy)';
+      }
+      clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        if (status) status.textContent = hint;
+      }, 2000);
+    });
+  }
+</script>
+
 <style>
+  h1 {
+    margin-bottom: 0.2rem;
+  }
+  .subtitle {
+    margin: 0 0 1.25em;
+    font-style: italic;
+    color: var(--muted);
+  }
+  /* Photo with the first paragraph beside it; stacks on narrow screens. */
+  .intro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1em 1.5em;
+    margin-bottom: 1em;
+  }
+  .intro p {
+    flex: 1 1 15rem;
+    min-width: 0;
+    margin: 0;
+  }
   .profile {
     display: block;
+    flex: none;
     width: 160px;
     height: 160px;
     object-fit: cover;
-    margin: 0 0 1em;
+  }
+  .updated {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .contact li + li {
+    margin-top: 0.3rem;
+  }
+  /* Looks like a regular link, but copies instead of opening a mail app. */
+  .copy-email {
+    font: inherit;
+    color: var(--accent);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: copy;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  .copy-email:hover {
+    text-decoration-thickness: 2px;
+  }
+  .copied {
+    font-size: 0.85rem;
+    margin-left: 0.4rem;
   }
 </style>

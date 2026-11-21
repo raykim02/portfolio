@@ -3,7 +3,9 @@ import { NAV, SITE, url } from '../lib/site';
 
 const current = Astro.url.pathname.replace(/\/$/, '');
 const isActive = (href: string) => {
-  const full = url(href);
+  const full = url(href).replace(/\/$/, '');
+  // Home ("/") is only active on the home page itself, not on every page.
+  if (full === '') return current === '';
   return current === full || current.startsWith(`${full}/`);
 };
 ---

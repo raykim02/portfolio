@@ -42,7 +42,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
-  font-size: 0.875rem; /* Verdana runs wide; 14px reads like classic small Verdana */
+  font-size: 0.9375rem; /* 15px: classic small Verdana, a touch easier to read */
   line-height: 1.6;
 }
 

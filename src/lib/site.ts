@@ -4,16 +4,17 @@ export const SITE = {
   title: 'Raymond Kim',
   description:
     'Database developer in Austin, TX, with experience across the data center, finance, and oil and gas industries. Moving into data engineering.',
+  tagline: 'Data Engineering · Austin, TX',
   email: 'hkapray@gmail.com',
   linkedin: 'https://www.linkedin.com/in/raykim02',
   github: 'https://github.com/raykim02',
 };
 
 export const NAV = [
-  { href: '/about', label: 'About' },
+  { href: '/', label: 'About' },
   { href: '/experience', label: 'Experience' },
   { href: '/projects', label: 'Projects' },
-  { href: '/other', label: 'Other' },
+  { href: '/certifications', label: 'Certifications' },
 ];
 
 /** Prefix an internal path with the configured base (e.g. /portfolio). */

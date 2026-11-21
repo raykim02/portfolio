@@ -9,10 +9,9 @@ const certs = (await getCollection('certifications')).sort(
 );
 ---
 
-<BaseLayout title="Other" description="Certifications, coursework, and languages.">
-  <h1>Other</h1>
+<BaseLayout title="Certifications" description="Certifications, coursework, and languages.">
+  <h1>Certifications</h1>
 
-  <h2>Certifications</h2>
   {
     certs.length > 0 ? (
       <ul class="plain-list certs">
